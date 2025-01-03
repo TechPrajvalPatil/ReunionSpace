@@ -1,0 +1,72 @@
+﻿@{
+    ViewData["Title"] = "Logout";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Logout - Stellar Admin</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="~/assets/vendors/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="~/assets/vendors/flag-icon-css/css/flag-icons.min.css">
+    <link rel="stylesheet" href="~/assets/vendors/css/vendor.bundle.base.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="shortcut icon" href="~/assets/images/favicon.png" />
+    <style>
+        /* Custom styles for the button */
+        .btn-custom {
+            background-color: #007bff;
+            color: white;
+            font-size: 1.2em;
+            padding: 10px 20px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+
+            .btn-custom:hover {
+                background-color: #0056b3;
+                box-shadow: 0 4px 15px rgba(0, 123, 255, 0.5);
+            }
+
+            .btn-custom i {
+                margin-right: 8px; /* Add space between icon and text */
+            }
+    </style>
+</head>
+<body class="bg-light d-flex align-items-center justify-content-center" style="height: 100vh; margin: 0;">
+    <div class="card text-center shadow" style="width: 400px;">
+        <div class="card-body">
+            <h2 class="card-title text-success"><i class="icon-logout"></i> Logout Successful</h2>
+            <p class="card-text">You have been successfully logged out.</p>
+            <p class="font-weight-light text-muted">Remember to log out to keep your account secure.</p>
+            <p class="font-weight-bold">Thank you for using our service!</p>
+            
+            <div class="d-flex align-items-center justify-content-around">
+                <p class="mt-4" style="margin-right:-50px">
+                    For login again
+                </p>
+                <a asp-action="Login" class="btn btn-custom mt-3">
+                    <i class="icon-arrow-right-circle"></i> Click Here
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- plugins:js -->
+    <script src="~/assets/vendors/js/vendor.bundle.base.js"></script>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- endinject -->
+    <!-- inject:js -->
+    <script src="~/assets/js/off-canvas.js"></script>
+    <script src="~/assets/js/hoverable-collapse.js"></script>
+    <script src="~/assets/js/misc.js"></script>
+    <script src="~/assets/js/settings.js"></script>
+    <script src="~/assets/js/todolist.js"></script>
+    <!-- endinject -->
+</body>
+</html>

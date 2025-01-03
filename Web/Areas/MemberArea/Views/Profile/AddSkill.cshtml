@@ -1,0 +1,45 @@
+﻿@model MemberSkills
+
+<div class="card shadow-lg border-light mb-4">
+    <div class="card-body">
+        <h5 class="card-title text-center text-primary mb-4">Add Skill</h5>
+
+        <form class="row g-3" method="post" asp-action="AddSkill" enctype="multipart/form-data">
+            <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+
+            <!-- Select Skills Section -->
+            <div class="col-12">
+                <label class="form-label">Select Skills</label>
+                <div class="border p-3 rounded-3">
+                    @await Component.InvokeAsync("CheckBoxListVC")
+                </div>
+            </div>
+
+            <!-- Proficiency Section -->
+            <div class="col-12">
+                <label class="form-label">Proficiency</label>
+                <select asp-for="Proficiency" class="form-select shadow-sm" asp-items="@Html.GetEnumSelectList<ProficiencyEnum>()">
+                    <option value="">Select Proficiency</option>
+                </select>
+            </div>
+
+            <!-- No Of Years Section -->
+            <div class="col-12">
+                <label class="form-label">No Of Years</label>
+                <input asp-for="NoOfYears" class="form-control" type="number" min="1" />
+            </div>
+
+            <!-- Submit Button -->
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary btn-lg px-4 shadow-sm">
+                    <i class="fa fa-check-circle"></i> Submit
+                </button>
+                <a class="btn btn-dark btn-lg px-4" asp-action="EditProfile" asp-controller="MemberHome">
+                    <i class="fa fa-arrow-left"></i> Back
+                </a>
+            </div>
+        </form>
+
+    </div>
+</div>
+

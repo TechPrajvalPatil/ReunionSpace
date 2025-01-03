@@ -1,0 +1,19 @@
+﻿@model Skill
+<div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Create</h4>
+            <p class="card-description"> Add Skill </p>
+            <form asp-action="Create" method="post" class="forms-sample">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label>Skill Name</label>
+                    <input asp-for="SkillName" class="form-control" placeholder="Skill">
+                    <span asp-validation-for="SkillName"></span>
+                </div>
+                <input type="submit" value="Save" class="btn btn-primary btn-rounded mr-2">
+                <a asp-action="Index" class="btn btn-light btn-rounded">Back To List</a>
+            </form>
+        </div>
+    </div>
+</div>

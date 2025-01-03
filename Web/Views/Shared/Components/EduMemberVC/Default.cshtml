@@ -1,0 +1,43 @@
+﻿@model IEnumerable<MemberEducation>
+
+<div class="container mt-5">
+    <h3 class="text-center text-dark mb-4" style="font-weight: bold;">
+        <i class="fa fa-graduation-cap me-2" style="color: #4A90E2;"></i> Education Details
+    </h3>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-warning text-center mb-4">
+            <i class="fa fa-exclamation-triangle me-2"></i> No education details have been added by members yet.
+        </div>
+    }
+    else
+    {
+        <div class="row justify-content-center">
+            @foreach (var temp in Model)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card border-0 shadow-lg" style="border-radius: 10px;">
+                        <div class="card-body text-center" style="background-color: #f8f9fa;">
+                            <h5 class="card-title text-dark mb-3" style="font-weight: 600;">
+                                <i class="fa fa-graduation-cap" style="color: #4A90E2;"></i> @temp.EducationTitle
+                            </h5>
+                            <p class="card-text mb-3" style="font-size: 0.9rem; color: #6c757d;">
+                                <strong class="fw-bold">Passout Year:</strong> @temp.PassoutYear <br>
+                                <strong class="fw-bold">University/College:</strong> @temp.UniversityOrCollegeName <br>
+                                <strong class="fw-bold">Grade/Percentage:</strong> @temp.GradeOrPercentage
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+<style>
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+</style>

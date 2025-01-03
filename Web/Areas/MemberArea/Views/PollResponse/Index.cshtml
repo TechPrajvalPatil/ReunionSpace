@@ -1,0 +1,38 @@
+﻿<div class="container mt-4">
+    <div class="row">
+        <div class="col-lg-12">
+            <h3 class="fw-bolder text-center mb-4" style="font-size: 2.5rem;color: #4A90E2;">
+                <i class="fa fa-tasks me-2"></i> <span class="text-dark fw-bold">Polls</span>
+            </h3>
+            <p class="text-center mb-4" style="font-size: 1.2rem; color: #555;">
+                Share Your Response to Polls
+            </p>
+
+            <ul class="nav nav-pills justify-content-center mb-4" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active rounded-pill fw-bold" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">
+                        <i class="fa fa-plus-circle me-2"></i> New Open Polls
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link rounded-pill fw-bold" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">
+                        <i class="fa fa-check-circle me-2"></i> Responded Polls
+                    </button>
+                </li>
+            </ul>
+
+            <div class="tab-content border rounded p-4 bg-light" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                    <div>
+                        @await Component.InvokeAsync("OpenPollsVC")
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                    <div>
+                        @await Component.InvokeAsync("RespondedPollVC")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

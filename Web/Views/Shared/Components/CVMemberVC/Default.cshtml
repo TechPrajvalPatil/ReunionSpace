@@ -1,0 +1,54 @@
+﻿@model List<Core.MemberResume>
+
+<div class="container mt-5">
+    <div class="resume-section card shadow-lg p-4">
+        <h3 class="text-center text-dark mb-4" style="font-weight: bold;">
+            <i class="fa fa-id-badge me-2" style="color: #4A90E2;"></i> Resume
+        </h3>
+
+        @if (!Model.Any())
+        {
+            <div class="alert alert-warning text-center mb-4">
+                <i class="fa fa-exclamation-triangle me-2"></i> No resumes uploaded by member yet.
+            </div>
+        }
+        else
+        {
+            <div class="list-group">
+                @foreach (var temp in Model)
+                {
+                    <div class="list-group-item d-flex justify-content-between align-items-center mb-3 border rounded shadow-sm p-3">
+                        <div>
+                            <a href="@Url.Content(temp.ResumeFilePath)" target="_blank" class="text-decoration-none text-primary">
+                                <h5 class="mb-1">@temp.FileType Resume - @System.IO.Path.GetFileName(temp.ResumeFilePath)</h5>
+                            </a>
+                            <p>
+                                Last Updated: @temp.LastUpadatedDate.ToString("yyyy-MM-dd")
+                            </p>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    .resume-section {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .list-group-item {
+        transition: transform 0.3s ease;
+    }
+
+    .list-group-item:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .text-primary {
+        color: #007bff !important;
+    }
+</style>

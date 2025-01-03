@@ -1,0 +1,38 @@
+﻿@model IEnumerable<MemberConnectionVM>
+
+@if (Model != null && Model.Any())
+{
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @foreach (var connection in Model)
+        {
+            <div class="col">
+                <div class="card h-100 border-0 shadow-lg rounded" style="transition: transform 0.3s; overflow: hidden;">
+                    <div class="text-center p-3">
+                        <img src="@(!string.IsNullOrEmpty(connection.ProfilePicture) ? connection.ProfilePicture : Url.Content("~/ProfilePhoto/Profile.jpg"))"
+                             alt="@connection.ConnectedMemberName"
+                             class="rounded-circle border border-primary mb-3"
+                             style="width: 80px; height: 80px; object-fit: cover;">
+                        <h5 class="card-title text-primary">@connection.ConnectedMemberName</h5>
+                        <span class="badge bg-info text-white">@connection.Gender.ToString()</span>
+                    </div>
+                    <div class="card-body text-center">
+                        <p class="text-muted">Connected on @connection.AcceptDate.ToString("MMMM dd, yyyy")</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <div class="alert alert-warning text-center" role="alert">
+        <i class="fa fa-exclamation-triangle me-2" style="font-size: 1.5rem;"></i>No Connection Found!
+    </div>
+}
+
+<style>
+    .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+</style>

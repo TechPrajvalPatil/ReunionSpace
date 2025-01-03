@@ -1,0 +1,41 @@
+﻿@model IEnumerable<PollVM>
+<div class="col-lg-12 grid-margin stretch-card">
+    <h3 class="fw-bolder text-primary mb-4" style="font-size: 2rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">
+        <i class="fa fa-tasks me-2"></i> <span class="text-dark fw-bold">Open Polls</span>
+    </h3>
+    <p class="card-description" style="font-size: 1.2rem; color: #555; margin-bottom: 1.5rem;">
+        Click the Respond Button to Submit Your Response!
+    </p>
+    <div class="accordion" id="pollsAccordion">
+        @if (!Model.Any())
+        {
+            <div class="alert alert-warning text-center" role="alert">
+                No New Open Polls Here!!
+            </div>
+        }
+        else
+        {
+            @foreach (var temp in Model)
+            {
+                <div class="accordion-item mb-3">
+                    <h2 class="accordion-header" id="heading-@temp.PollId">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-@temp.PollId" aria-expanded="true" aria-controls="collapse-@temp.PollId">
+                            <i class="fa fa-question-circle me-2"></i> @temp.PollQuestion
+                        </button>
+                    </h2>
+                    <div id="collapse-@temp.PollId" class="accordion-collapse collapse" aria-labelledby="heading-@temp.PollId" data-bs-parent="#pollsAccordion">
+                        <div class="accordion-body">
+                            <p>
+                                <strong>Poll Date:</strong> <span class="badge bg-info">@temp.PollDate.ToString("MMMM dd, yyyy")</span>
+                            </p>
+                            <div class="text-center">
+                                <a asp-action="ResponsePoll" asp-controller="PollResponse" asp-route-id="@temp.PollId" class="btn btn-primary btn-rounded btn-fw">Respond</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+
+    </div>
+</div>

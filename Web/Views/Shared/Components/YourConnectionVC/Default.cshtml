@@ -1,0 +1,38 @@
+﻿@model IEnumerable<PendingConnectionVM>
+
+<div class="your-connections mt-4">
+    <h3 class="mb-3"><i class="fa fa-users me-2" style="color: #4A90E2;"></i>Your Connections</h3>
+
+    @if (Model.Any())
+    {
+        @foreach (var temp in Model)
+        {
+            <div class="card mb-3 shadow-sm border-0" style="border-radius: 10px;">
+                <div class="card-body p-2 d-flex align-items-center">
+
+                    <img src="@(!string.IsNullOrEmpty(temp.ProfilePicture) ? temp.ProfilePicture : Url.Content("~/ProfilePhoto/Profile.jpg"))"
+                         alt="Profile Picture"
+                         class="rounded-circle"
+                         style="width: 45px; height: 45px; object-fit: cover; margin-right: 10px;" />
+
+                    <div class="flex-grow-1">
+                        <h6 class="mb-0">@temp.FullName</h6>
+                        <p class="small text-muted mb-0">Connected</p>
+                    </div>
+
+                    <a asp-action="FeedsByMember" asp-controller="Feeds" asp-route-id="@temp.MemberId"
+                       class="btn btn-sm btn-outline-primary"
+                       style="padding: 4px 10px; font-size: 12px;">
+                        View
+                    </a>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="alert alert-info">
+            <i class="fa fa-exclamation-triangle me-2"></i> No Connections
+            </div>
+    }
+</div>

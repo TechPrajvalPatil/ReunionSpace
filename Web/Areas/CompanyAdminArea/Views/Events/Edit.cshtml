@@ -1,0 +1,88 @@
+﻿@model Event
+<div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Edit</h4>
+            <p class="card-description"> Edit Events </p>
+            <form asp-action="Edit" method="post" enctype="multipart/form-data" class="forms-sample">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div>
+                    <input type="hidden" asp-for="EventId" />
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Event Title</label>
+                    <input asp-for="EventTitle" class="form-control" placeholder="Title">
+                    <span asp-validation-for="EventTitle" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Event Description</label>
+                    <textarea asp-for="EventShortDesc" class="form-control" placeholder="Add Description"></textarea>
+                    <span asp-validation-for="EventShortDesc" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Event Date</label>
+                    <input asp-for="EventDateTime" class="form-control" placeholder="Event Date">
+                    <span asp-validation-for="EventDateTime" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Current Photo</label>
+                    @if (!string.IsNullOrEmpty(Model.EventLogo))
+                    {
+                        <img src="@Model.EventLogo" alt="Event Photo" style="max-width: 200px;" />
+                    }
+                    else
+                    {
+                        <p>No photo available</p>
+                    }
+                    <input type="hidden" asp-for="EventLogo" />
+                </div>
+
+
+                <div class="form-group">
+                    <label class="form-label">Event Photo</label>
+                    <input type="file" asp-for="PhotoFile" class="form-control" accept="image/*" />
+                    <span asp-validation-for="PhotoFile" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">EventType</label>
+                    <select asp-for="EventType" asp-items="@Html.GetEnumSelectList<EventTypeEnum>()" class="form-control" style="padding: 0.94rem 1.375rem">
+                    </select>
+                    <span asp-validation-for="EventType" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Registration From Date</label>
+                    <input asp-for="RegistrationFromDate" class="form-control" placeholder="From Date">
+                    <span asp-validation-for="RegistrationToDate" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Registration To Date</label>
+                    <input asp-for="RegistrationToDate" class="form-control" placeholder="To Date">
+                    <span asp-validation-for="RegistrationToDate" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Member Limit</label>
+                    <input asp-for="MemberLimit" class="form-control" placeholder="Add Member Limit" />
+                    <span asp-validation-for="MemberLimit" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">EventMode</label>
+                    <select asp-for="EventMode" asp-items="@Html.GetEnumSelectList<EventModeEnum>()" class="form-control" style="padding: 0.94rem 1.375rem">
+                    </select>
+                    <span asp-validation-for="EventMode" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Created By</label>
+                    <select asp-for="CreatedById" asp-items=ViewBag.Companies class="form-control" style="padding: 0.94rem 1.375rem">
+                        <option>Select Company Admin</option>
+                    </select>
+                    <span asp-validation-for="CreatedById" class="text-danger"></span>
+                </div>
+
+                <input type="submit" value="Update" class="btn btn-primary btn-rounded mr-2">
+                <a asp-action="Index" class="btn btn-light btn-rounded">Back To List</a>
+            </form>
+        </div>
+    </div>
+</div>

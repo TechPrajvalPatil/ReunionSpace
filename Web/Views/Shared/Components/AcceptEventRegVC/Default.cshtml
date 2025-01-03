@@ -1,0 +1,41 @@
+﻿@model IEnumerable<EventRegistration>
+
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h3 class="fw-bolder">Accepted Registration</h3>
+            <p class="card-description">
+                Explore Events
+            </p>
+            <table class="table table-striped text-center">
+                <thead>
+                    <tr>
+                        <th class="fw-bolder"> # </th>
+                        <th class="fw-bolder"> Event Title</th>
+                        <th class="fw-bolder"> Member Name</th>
+                        <th class="fw-bolder"> Registration Date</th>
+                        <th class="fw-bolder"> Accepted </th> 
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int srno = 1;
+                    }
+                    @foreach (var temp in Model)
+                    {
+                        <tr>
+                            <td>@srno</td>
+                            <td>@temp.Event.EventTitle</td>
+                            <td>@temp.Member.FullName</td>
+                            <td>@temp.RegistrationDate.ToString("MMMM dd, yyyy")</td>
+                            <td>
+                                <button class="btn btn-success" disabled>Yes</button> 
+                            </td>
+                        </tr>
+                        srno++;
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

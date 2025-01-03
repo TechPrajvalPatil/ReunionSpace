@@ -1,0 +1,43 @@
+﻿@model Poll
+<div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Edit</h4>
+            <p class="card-description"> Edit Polls </p>
+            <form asp-action="Edit" method="post" class="forms-sample">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div>
+                    <input type="hidden" asp-for="PollId" />
+                </div>
+                <div class="form-group">
+                    <label class="form-label">PollDate</label>
+                    <input asp-for="PollDate" class="form-control">
+                    <span asp-validation-for="PollDate"></span>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Poll Status</label>
+                    <select asp-for="PollStatus" asp-items="@Html.GetEnumSelectList<PollStatusEnum>()" class="form-control" style="padding: 0.94rem 1.375rem">
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Poll Question</label>
+                    <input asp-for="PollQuestion" class="form-control">
+                    <span asp-validation-for="PollQuestion"></span>
+                </div>
+                 <div class="form-group">
+                    <label class="form-label">Created By</label>
+                    <select asp-for="CreatedById" asp-items=ViewBag.Companies class="form-control" style="padding: 0.94rem 1.375rem">
+                        <option>Select Company Admin</option>
+                    </select>
+                    <span asp-validation-for="CreatedById" class="text-danger"></span>
+                </div>
+
+                <input type="submit" value="Update" class="btn btn-primary btn-rounded mr-2">
+                <a asp-action="Index" class="btn btn-light btn-rounded">Back To List</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+

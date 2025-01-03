@@ -1,0 +1,154 @@
+﻿@model MemberRegisterVM
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<form method="post" asp-action="Register" asp-controller="ManageMember" asp-area="">
+    <div class="form-group py-3">
+        <label class="mb-2 fw-bold">First Name</label>
+        <input asp-for="FirstName" placeholder="Enter First Name" class="form-control w-100 rounded-3 p-3">
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+    <div class="form-group py-3">
+        <label class="mb-2 fw-bold">LastName</label>
+        <input asp-for="LastName" placeholder="Enter Last Name" class="form-control w-100 rounded-3 p-3">
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+    <div class="form-group py-3">
+    <label class="mb-2 fw-bold">Gender</label>
+    <select asp-for="Gender" asp-items="@Html.GetEnumSelectList<GenderEnum>()" class="form-select w-100 rounded-3 p-3">
+    </select>
+    <span asp-validation-for="Gender" class="text-danger"></span>
+    </div>
+    <div class="form-group py-3">
+        <label class="mb-2 fw-bold">Mobile No</label>
+        <input asp-for="MobileNo" placeholder="Mobile No" class="form-control w-100 rounded-3 p-3">
+        <span asp-validation-for="MobileNo" class="text-danger"></span>
+    </div>
+    <div class="form-group py-3">
+        <label class="mb-2 fw-bold">CourseName</label>
+        <input asp-for="CourseName" placeholder="Enter Course Name" class="form-control w-100 rounded-3 p-3">
+        <span asp-validation-for="CourseName" class="text-danger"></span>
+    </div>
+    <div class="form-group py-3">
+        <label class="mb-2 fw-bold">Attended Year</label>
+        <select asp-for="AttendedYear" id="yr" class="form-select w-100 rounded-3 p-3">
+            <option value="">Select Year</option>
+        </select>
+        <span asp-validation-for="AttendedYear" class="text-danger"></span>
+    </div>
+    <div class="form-group py-3">
+        <label class="mb-2 fw-bold">Address</label>
+        <input asp-for="Address" placeholder="Enter Address" class="form-control w-100 rounded-3 p-3">
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+    <div class="form-group py-3">
+        <label class="mb-2 fw-bold">Country</label>
+        <select id="country" asp-items=ViewBag.countries class="form-control w-100 rounded-3 p-3">
+            <option>Select Country</option>
+        </select>
+    </div>
+    <div class="form-group py-3">
+        <label class="mb-2 fw-bold">State</label>
+        <select id="state" asp-items=ViewBag.states class="form-control w-100 rounded-3 p-3">
+            <option>Select State</option>
+        </select>
+    </div>
+    <div class="form-group py-3">
+        <label class="mb-2 fw-bold">City</label>
+        <select asp-for="CityId" asp-items=ViewBag.cities class="form-control w-100 rounded-3 p-3">
+            <option>Select City</option>
+        </select>
+        <span asp-validation-for="CityId" class="text-danger"></span>
+    </div>
+    <div class="form-group py-3">
+        <label class="mb-2 fw-bold">EmailId</label>
+        <input asp-for="EmailId" placeholder="Enter Email Address" class="form-control w-100 rounded-3 p-3">
+        <span asp-validation-for="EmailId" class="text-danger"></span>
+    </div>
+    <div class="form-group py-3">
+        <label class="mb-2 fw-bold">Password</label>
+        <input asp-for="Password" placeholder="Enter Password" class="form-control w-100 rounded-3 p-3">
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-dark w-100 my-3">Register</button>
+</form>
+
+
+<script type="text/javascript">
+
+    $(function () {
+        $("#country").change(function () {
+            $.ajax({
+                url: "/ManageMember/GetStatesByCountry/?CountryId=" + $(this).val(),
+                type: "Get",
+                contentType: "application/json",
+                success: function (result) {
+                     //alert(JSON.stringify(result))
+
+                    $("#state").empty();
+                    $("#state").append("<option>Select State</option>");
+                    $.each(result, function (ind, item) {
+                         // alert(ind);
+                         // alert(JSON.stringify(item));
+
+                        var opt = "<option value=" + item.stateId + ">" + item.stateName + "</option>";
+
+                        $("#state").append(opt);
+                    });
+
+                },
+                error: function (err) {
+                    alert(JSON.stringify(err));
+                }
+
+            })
+        })
+
+
+
+        $("#state").change(function () {
+            $.ajax({
+                url: "/ManageMember/GetCities/?StateId=" + $(this).val(),
+                type: "Get",
+                contentType: "application/json",
+                success: function (result) {
+                     //alert(JSON.stringify(result))
+                    console.log(result);
+
+
+                    $("#CityId").empty();
+                    $("#CityId").append("<option>Select City</option>");
+                    $.each(result, function (ind, item) {
+                        //alert(ind);
+                        //alert(JSON.stringify(item));
+
+                        var opt = "<option value=" + item.cityId + ">" + item.cityName + "</option>";
+
+                        $("#CityId").append(opt);
+                    });
+
+                },
+                error: function (err) {
+                    alert(JSON.stringify(err));
+                }
+
+            })
+        })
+    })
+</script>
+
+<script>
+    var currentYear = new Date().getFullYear();
+    var startYear = 1900; 
+    var dropdown = document.getElementById("yr");
+
+    for (let year = currentYear; year >= startYear; year--) {
+        let option = document.createElement("option");
+        option.value = year;
+        option.text = year;
+        dropdown.add(option);
+    }
+</script>
+
+
+

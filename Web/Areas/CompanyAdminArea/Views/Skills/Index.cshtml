@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Skill>
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h3 class="fw-bolder"><i class="fa fa-tasks me-2"></i>Skills List</h3>
+            <p class="card-description">
+                Manage Polls
+            </p>
+            <a asp-action="Create" class="btn btn-outline-info btn-rounded btn-fw mb-4">Create New</a>
+            <table class="table table-striped text-center">
+                <thead>
+                    <tr>
+                        <th class="fw-bolder"> # </th>
+                        <th class="fw-bolder"> Skill Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int srno = 1;
+                    }
+                    @foreach (var temp in Model)
+                    {
+                        <tr>
+                            <td>@srno</td>
+                            <td>@temp.SkillName</td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@temp.SkillId" class="btn btn-primary btn-rounded btn-fw"><i class="fa fa-edit me-2"></i>Edit</a>
+                                <a asp-action="Delete" asp-route-id="@temp.SkillId" class="btn btn-danger btn-rounded btn-fw"><i class="fa fa-trash-o me-2"></i>Delete</a>
+                            </td>
+                        </tr>
+                        srno++;
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

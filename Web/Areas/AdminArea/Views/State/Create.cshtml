@@ -1,0 +1,26 @@
+﻿@model State
+<div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Create</h4>
+            <p class="card-description"> Add State </p>
+            <form asp-action="Create" method="post" class="forms-sample">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label class="form-label">State</label>
+                    <input asp-for="StateName" class="form-control" placeholder="State">
+                    <span asp-validation-for="StateName"></span>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Country</label>
+                    <select asp-for="CountryId" asp-items=ViewBag.countries class="form-control" style="padding: 0.94rem 1.375rem">
+                        <option>Select Country</option>
+                    </select>
+                    <span asp-validation-for="CountryId" class="text-danger"></span>
+                </div>
+                <input type="submit" value="Save" class="btn btn-primary btn-rounded mr-2">
+                <a asp-action="Index" class="btn btn-light btn-rounded">Back To List</a>
+            </form>
+        </div>
+    </div>
+</div>

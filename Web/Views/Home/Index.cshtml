@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magic Alumni</title>
+
+    <link href="~/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <style>
+        body {
+            background-image: url('/Background-image/AlumniBackground1.jpg'); /* Path relative to wwwroot */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #fff; 
+        }
+
+        .container {
+            max-width: 1200px; 
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95); 
+            color: #000; 
+            border-radius: 15px; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+            transition: transform 0.2s; 
+        }
+
+            .card:hover {
+                transform: translateY(-5px); 
+            }
+
+        .btn {
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px; 
+        }
+
+        footer {
+            color: #ddd;
+        }
+
+        .header-container {
+            margin-top: 5rem;
+            margin-bottom: 4rem;
+        }
+
+            .header-container h1 {
+                font-size: 3rem; 
+                font-weight: bold; 
+            }
+
+            .header-container p {
+                font-size: 1.2rem;
+                font-weight: 300;
+            }
+    </style>
+</head>
+<body>
+    <div class="container text-center header-container">
+       
+        <h1 class="display-4">Welcome to Magic Alumni</h1>
+        <p class="lead">Connect, share, and engage with alumni from your institution.</p>
+    </div>
+
+    <div class="container">
+        
+        <div class="row mt-4">
+
+            
+            <div class="col-md-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Admin</h5>
+                        <p class="card-text">
+                            Admins play a critical role in overseeing and monitoring all alumni activities within the platform
+                            and managing locations such as Country, State, and City.
+                        </p>
+                        <a asp-action="Index" asp-controller="AdminHome" asp-area="AdminArea" class="btn btn-success">Go to Admin</a>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="col-md-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Company Admin</h5>
+                        <p class="card-text">
+                            The Company Admin is responsible for managing and controlling alumni activities for the institution.
+                            They can activate or deactivate members and students, organize events, handle event registrations, manage polls and responses, and define the rules
+                            and regulations for alumni engagements.
+                        </p>
+                        <a asp-action="Index" asp-controller="CompanyAdminHome" asp-area="CompanyAdminArea" class="btn btn-primary">Go to CompanyAdmin</a>
+                    </div>
+                </div>
+            </div>
+
+           
+            <div class="col-md-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Member</h5>
+                        <p class="card-text">
+                            Members are the heart of Magic Alumni. They can register
+                            and log in to the platform, view and register for events, participate in polls, send and accept
+                            connection requests, and expand their network by maintaining connections with friends and peers.
+                        </p>
+                        <a asp-action="Index" asp-controller="MemberHome" asp-area="MemberArea" class="btn btn-info">Go to Member</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <footer class="mt-5">
+            <p class="text-muted">&copy; 2024 Magic Alumni. All rights reserved.</p>
+        </footer>
+    </div>
+
+   
+</body>
+</html>

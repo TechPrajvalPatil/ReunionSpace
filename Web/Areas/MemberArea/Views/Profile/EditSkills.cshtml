@@ -1,0 +1,39 @@
+﻿@model MemberSkills
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Add Skill</h5>
+
+        <form class="row g-3" method="post" asp-action="EditSkills" enctype="multipart/form-data">
+            <div class="text-danger" asp-validation-summary="ModelOnly">
+            </div>
+
+
+            <div class="col-12">
+                <label class="form-label">Select Skills</label>
+                @await Component.InvokeAsync("CheckBoxListVC")
+            </div>
+
+            <div class="col-12">
+                <label class="form-label">Proficiency</label>
+                <select asp-for="Proficiency" class="form-select" asp-items="@Html.GetEnumSelectList<ProficiencyEnum>()">
+                    <option>Select Proficiency</option>
+                </select>
+            </div>
+
+            <div class="col-12">
+                <label class="form-label">No Of Years</label>
+                <input asp-for="NoOfYears" class="form-control" />
+            </div>
+
+
+
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <a class="btn btn-info" asp-action="EditProfile"> Back </a>
+            </div>
+        </form>
+
+    </div>
+</div>
+

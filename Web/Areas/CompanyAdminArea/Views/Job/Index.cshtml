@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Job>
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h3 class="fw-bolder"><i class="fa fa-id-card-o me-2"></i>Jobs List</h3>
+            <p class="card-description">
+                Manage Job Profiles
+            </p>
+            <a asp-action="Create" class="btn btn-outline-info btn-rounded btn-fw mb-4">Create New</a>
+            <table class="table table-striped text-center">
+                <thead>
+                    <tr>
+                        <th class="fw-bolder"> # </th>
+                        <th class="fw-bolder"> JobTitle</th>
+                        <th class="fw-bolder"> Minimum Education </th>
+                        <th class="fw-bolder"> Experience </th>
+                        <th class="fw-bolder"> Job Role</th>
+                        <th class="fw-bolder"> Status</th>
+                        <th class="fw-bolder"> Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int srno = 1;
+                    }
+                    @foreach (var temp in Model)
+                    {
+                        <tr>
+                            <td>@srno</td>
+                            <td>@temp.JobTitle</td>
+                            <td>@temp.MinimumEducation</td>
+                            <td>@temp.Experience</td>
+                            <td>@temp.JobRole</td>
+                            <td>
+                                @if(temp.IsOpen)
+                                {
+                                    <p>Open</p>
+                                }
+                                else
+                                {
+                                    <p>Close</p>
+                                }
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@temp.JobId" class="btn btn-primary btn-rounded"><i class="fa fa-edit me-2"></i>Edit</a>
+                                <a asp-action="Delete" asp-route-id="@temp.JobId" class="btn btn-danger btn-rounded"><i class="fa fa-trash me-2"></i>Delete</a>
+                            </td>
+                        </tr>
+                        srno++;
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+﻿@model IEnumerable<MemberExperience>
+
+<div class="container mt-5">
+    <h3 class="text-center text-dark mb-4" style="font-weight: bold;">Experience Details</h3>
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="row justify-content-center">
+            @foreach (var temp in Model)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card border-0 shadow-lg" style="border-radius: 15px; transition: transform 0.2s;">
+                        <div class="card-body" style="background-color: #ffffff;">
+                            <h5 class="card-title text-dark text-center mb-3" style="font-weight: 600;">
+                                <i class="fa fa-building" style="color: #4A90E2;"></i> @temp.ExperienceTitle
+                            </h5>
+                            <p class="card-text mb-3" style="font-size: 0.95rem; color: #495057;">
+                                <strong class="fw-bold">Duration:</strong> @temp.ExperienceDuration hours <br>
+                                <strong class="fw-bold">Description:</strong> @temp.ExperienceDescription <br>
+                                <strong class="fw-bold">Company Name:</strong> @temp.CompanyName<br />
+                                <strong class="fw-bold">From:</strong> @temp.FromDate.ToString("MMMM dd yyyy")<br />
+                                <strong class="fw-bold">To:</strong> @temp.ToDate.ToString("MMMM dd yyyy")<br />
+                            </p>
+                            <div class="text-center mt-3">
+                                <a asp-action="EditExperience" asp-controller="Profile" asp-route-id="@temp.MemberExperienceId" class="btn btn-outline-primary btn-sm" style="border-radius: 20px; transition: background-color 0.3s;">
+                                    <i class="fa fa-edit"></i> Update
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="text-center mt-4">
+            <a asp-action="AddExperience" asp-controller="Profile" asp-area="MemberArea" class="btn btn-primary btn-lg" style="border-radius: 30px;">
+                <i class="fa fa-plus-circle"></i> Add Another Experience
+            </a>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning text-center">
+            <i class="fa fa-exclamation-triangle me-2"></i> No experience details found. You can add your experience details by clicking on the button below
+        </div>
+        
+        <div class="text-center mt-3">
+            <a asp-action="AddExperience" asp-controller="Profile" asp-area="MemberArea" class="btn btn-primary btn-lg" style="border-radius: 30px;">
+                <i class="fa fa-plus-circle"></i> Add Experience
+            </a>
+        </div>
+    }
+</div>
+
+<style>
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+</style>

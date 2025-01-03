@@ -1,0 +1,39 @@
+﻿<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <!-- Change to modal-lg for a larger modal -->
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="tabs-listing">
+                    <nav>
+                        <div class="nav nav-tabs d-flex justify-content-center" id="nav-tab" role="tablist">
+                            <button class="nav-link text-capitalize active" id="nav-sign-in-tab" data-bs-toggle="tab"
+                                    data-bs-target="#nav-sign-in" type="button" role="tab" aria-controls="nav-sign-in"
+                                    aria-selected="true">
+                                Sign In
+                            </button>
+                            <button class="nav-link text-capitalize" id="nav-register-tab" data-bs-toggle="tab"
+                                    data-bs-target="#nav-register" type="button" role="tab" aria-controls="nav-register"
+                                    aria-selected="false">
+                                Register
+                            </button>
+                        </div>
+                    </nav>
+                    <div class="tab-content" id="nav-tabContent">
+                        <!-- Sign In Tab -->
+                        <div class="tab-pane fade active show" id="nav-sign-in" role="tabpanel" aria-labelledby="nav-sign-in-tab">
+                            @await Component.InvokeAsync("MemberLoginVC")
+                        </div>
+
+                        <!-- Register Tab -->
+                        <div class="tab-pane fade" id="nav-register" role="tabpanel" aria-labelledby="nav-register-tab">
+                            @await Component.InvokeAsync("MemberRegisterVC")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,62 @@
+﻿@model FeedsPhotoVideoVM
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<form method="post" asp-action="Create" asp-controller="Feeds" asp-area="MemberArea" enctype="multipart/form-data">
+    <div class="form-group py-3">
+        <label class="mb-2">Feed Title</label>
+        <input asp-for="FeedTitle" placeholder="Enter Feed Title" class="form-control w-100 rounded-3 p-3" />
+        <span asp-validation-for="FeedTitle" class="text-danger"></span>
+    </div>
+
+    <div class="form-group py-3">
+        <label class="mb-2">Feed Description</label>
+        <textarea asp-for="FeedsDescription" placeholder="Enter Feed Description" class="form-control w-100 rounded-3 p-3"></textarea>
+        <span asp-validation-for="FeedsDescription" class="text-danger"></span>
+    </div>
+
+    <div class="form-group py-3">
+        <label class="mb-2">Feed Type</label>
+        <select asp-for="FeedType" asp-items="@Html.GetEnumSelectList<Core.Enums.FeedTypeEnum>()" id="feedTypeSelect" class="form-select w-100 rounded-3 p-3">
+            <option value="">Select Feed Type</option> 
+        </select>
+    </div>
+
+    <div class="form-group py-3">
+        <label id="uploadLabel" for="fileUpload">Upload File</label>
+        <input type="file" id="fileUpload" name="FileUpload" accept="" class="form-control"/>
+    </div>
+
+    <button type="submit" class="btn btn-dark w-100 my-3">Save</button>
+</form>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const feedTypeSelect = document.getElementById('feedTypeSelect');
+            const fileUpload = document.getElementById('fileUpload');
+            const uploadLabel = document.getElementById('uploadLabel');
+
+            function updateFileInput() {
+                const feedType = feedTypeSelect.value;
+
+                // Reset the input
+                fileUpload.value = ''; // Clear previous selection
+
+                // Update accept attribute based on selection
+                if (feedType === "1") { // Photo selected
+                    fileUpload.accept = "image/*";
+                    uploadLabel.textContent = "Upload Photo"; // Update label
+                } else if (feedType === "2") { // Video selected
+                    fileUpload.accept = "video/*";
+                    uploadLabel.textContent = "Upload Video"; // Update label
+                } else {
+                    fileUpload.accept = ""; // No specific accept for unselected
+                    uploadLabel.textContent = "Upload File"; // Default label
+                }
+            }
+
+            // Add event listener to the dropdown to call updateFileInput on change
+            feedTypeSelect.addEventListener('change', updateFileInput);
+        });
+    </script>
+}

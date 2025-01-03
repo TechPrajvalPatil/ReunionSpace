@@ -1,0 +1,55 @@
+﻿@model IEnumerable<PollOption>
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h3 class="fw-bolder"><i class="fa fa-tasks me-2"></i>Polls Option List</h3>
+            <p class="card-description">
+                Manage Polls Options
+            </p>
+            <a asp-action="Create" class="btn btn-outline-info btn-rounded btn-fw mb-4">Create New</a>
+
+            @{
+                string currentPollQuestion = string.Empty;
+                int srno = 1;
+                int optionIndex = 0;
+            }
+
+            <div class="row">
+                @foreach (var temp in Model)
+                {
+                    if (currentPollQuestion != temp.Poll.PollQuestion)
+                    {
+                        currentPollQuestion = temp.Poll.PollQuestion;
+                        optionIndex = 0;
+
+                        <div class="col-12">
+                            <h4 class="mt-4"><strong>@srno. <span class="text-info">Poll Question: </span></strong> <span class="text-dark">@temp.Poll.PollQuestion</span></h4>
+                        </div>
+                        srno++;
+                    }
+
+                    char optionLabel = (char)('A' + optionIndex);
+                    optionIndex++;
+
+                    <div class="col-md-6 mb-4">
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <span class="badge bg-info rounded-circle p-3 text-white" style="width: 30px; height: 30px; display: inline-flex; justify-content: center; align-items: center;">
+                                        @optionLabel
+                                    </span>
+                                </h5>
+                                <p class="card-text mt-3"><strong>Poll Option:</strong> <span class="text-success">@temp.Option</span></p>
+                                <p class="card-text"><strong>Correct:</strong> @temp.IsCorrect</p>
+                                <div class="d-flex justify-content-between">
+                                    <a asp-action="Edit" asp-route-id="@temp.PollOptionId" class="btn btn-primary btn-sm"><i class="fa fa-edit me-2"></i>Edit</a>
+                                    <a asp-action="Delete" asp-route-id="@temp.PollOptionId" class="btn btn-danger btn-sm"><i class="fa fa-trash-o me-2"></i>Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

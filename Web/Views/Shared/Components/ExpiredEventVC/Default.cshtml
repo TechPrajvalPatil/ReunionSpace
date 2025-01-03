@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Event>
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h3 class="fw-bolder">Expired Events</h3>
+            <p class="card-description">
+                Explore Events
+            </p>
+            
+            <table class="table table-striped text-center">
+                <thead>
+                    <tr>
+                        <th class="fw-bolder"> # </th>
+                        <th class="fw-bolder"> Event Title</th>
+                        <th class="fw-bolder">Event DateTime</th>
+                        <th class="fw-bolder">EventType</th>
+                        <th class="fw-bolder">Registration Ends</th>
+                        <th class="fw-bolder">EventMode</th>
+
+                        <th class="fw-bolder">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int srno = 1;
+                    }
+                    @foreach (var temp in Model)
+                    {
+                        <tr>
+                            <td>@srno</td>
+                            <td>@temp.EventTitle</td>
+                            <td>@temp.EventDateTime.ToString("MMMM dd, yyyy")</td>
+                            <td>@temp.EventType</td>
+                            <td>@temp.RegistrationToDate.ToString("MMMM dd, yyyy")</td>
+                            <td>@temp.EventMode</td>
+
+                            <td>
+                                <a asp-action="Edit" asp-controller="Events" asp-area="CompanyAdminArea" asp-route-id="@temp.EventId" class="btn btn-primary btn-rounded">Edit</a>
+                                <a asp-action="Delete" asp-controller="Events" asp-area="CompanyAdminArea" asp-route-id="@temp.EventId" class="btn btn-danger btn-rounded">Delete</a>
+                                <a asp-action="Details" asp-controller="Events" asp-area="CompanyAdminArea" asp-route-id="@temp.EventId" class="btn btn-warning btn-rounded">Details</a>
+                            </td>
+                        </tr>
+                        srno++;
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

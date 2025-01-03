@@ -1,0 +1,73 @@
+﻿@model IEnumerable<ShowFeedsVM>
+
+<div class="container mt-5">
+    <div class="text-end mb-3">
+        <a class="btn btn-primary" asp-action="ManageFeed" asp-controller="Feeds" style="margin-left: auto;">Manage Feed</a>
+    </div>
+
+    <div class="text-center mb-4">
+        <h3 class="fw-bolder" style="font-family: 'Arial Black', sans-serif; font-size: 3.5rem; line-height: 1.2; color: #4A90E2;">
+            <i class="fa fa-pencil me-2"></i> 
+            <span class="text-dark fw-bold">Feeds</span>
+        </h3>
+        <p class="text-primary" style="font-size: 1.2rem; margin-top: 10px; color: #6c757d;font-style:oblique">
+            Explore the latest feeds and updates from our community. Enjoy a rich media experience!
+        </p>
+    </div>
+
+    <div class="d-flex flex-column align-items-center">
+        @foreach (var temp in Model)
+        {
+            <div class="col-md-6 mb-4">
+                <div class="card shadow-lg border-0 rounded-3 overflow-hidden" style="background-color: #f8f9fa;">
+                    <div class="card-header text-success fw-bold d-flex align-items-center">
+                        <svg class="user me-2" style="width: 24px; height: 24px;">
+                            <use xlink:href="#user"></use>
+                        </svg>
+                        @temp.MemberName
+                    </div>
+                    <div class="position-relative text-center">
+                        @if (temp.PhotoPathFile != null && temp.PhotoPathFile.Any())
+                        {
+                            <img src="@temp.PhotoPathFile.FirstOrDefault()" class="img-fluid" alt="Feed Photo" style="object-fit: contain; max-height: 400px; width: 100%;">
+                        }
+                        else if (temp.VideoUrl != null && temp.VideoUrl.Any())
+                        {
+                            <video controls style="max-height: 400px; border: none; background-color: transparent;">
+                                <source src="@temp.VideoUrl.FirstOrDefault()" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        }
+                    </div>
+                   
+                    <div class="card-body p-4">
+                        <h5 class="card-title text-primary fw-bold" style="font-size: 1.5rem;">@temp.FeedsTitle</h5>
+                        <p class="card-text mb-2" style="font-size: 0.9rem; color: #6c757d;">
+                            <i class="fa fa-calendar"></i> Posted on: <span class="text-info">@temp.FeedsDate.ToString("MMMM dd, yyyy")</span>
+                        </p>
+                        <p class="card-text" style="font-size: 1.1rem; line-height: 1.5; font-style: oblique;">
+                            @temp.FeedsDescription
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<a href="#top" class="btn btn-secondary" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;" title="Scroll to Top">
+    <i class="fa fa-chevron-up"></i>
+</a>
+
+<style>
+    .card:hover {
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        transform: scale(1.02);
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+
+    .text-center h3 {
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); 
+    }
+</style>

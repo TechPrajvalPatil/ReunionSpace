@@ -1,0 +1,119 @@
+﻿@model IEnumerable<MemberCourseVM>
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-3">
+            @await Component.InvokeAsync("YourConnectionVC")
+        </div>
+
+        <div class="col-md-6">
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <form asp-action="SearchByCourseYear" method="post" class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="courseName" class="form-label">Course Name</label>
+                            <input type="text" id="courseName" name="courseName" class="form-control" placeholder="Enter Course Name" />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="attendedYear" class="form-label">Attended Year</label>
+                            <input type="text" id="attendedYear" name="attendedYear" class="form-control" placeholder="Enter Attended Year" />
+                        </div>
+                        <div class="col-12 text-end">
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            @if (!Model.Any())
+            {
+                <div class="alert alert-warning text-center" role="alert">
+                    No connections found. Try searching for a different course or year.
+                </div>
+            }
+            else
+            {
+                <div class="card shadow-sm">
+                    <div class="card-body p-2">
+                        <table class="table table-hover table-striped table-borderless text-center" style="vertical-align:middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="fw-bold">Profile</th>
+                                    <th class="fw-bold">Name</th>
+                                    <th class="fw-bold">Age</th>
+                                    <th class="fw-bold">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-group-divider">
+                                @foreach (var temp in Model)
+                                {
+                                    <tr class="my-3" >
+                                        <td class="py-3">
+                                            <img src="@(!string.IsNullOrEmpty(temp.ProfilePicture) ? temp.ProfilePicture : Url.Content("~/ProfilePhoto/Profile.jpg"))"
+                                                 alt="Profile Picture"
+                                                 class="img-fluid rounded-circle"
+                                                 style="width: 60px; height: 60px;" />
+                                        </td>
+                                        <td class="py-3">@temp.FullName</td>
+                                        <td class="py-3">
+                                            @if (temp.DateOfBirth == null || temp.DateOfBirth == "0001-01-01")
+                                            {
+                                                <span class="text-danger">DOB not provided</span>
+                                            }
+                                            else
+                                            {
+                                                @temp.Age
+                                            }
+                                        </td>
+                                        <td class="py-3">
+                                            <a asp-action="SendReq" asp-controller="Connection" asp-route-reqid="@temp.MemberId" class="sendReq">Send Request</a>
+                                        </td>
+                                    </tr>
+                                    <tr class="p-0" style="height: 15px;"></tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="col-md-3">
+           
+            <div>
+                @await Component.InvokeAsync("PendingConnectionVC")
+            </div>
+            <div>
+                <div class="accordion accordion-flush" id="accordionFlushExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingOne">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                <i class="fa fa-ban me-2" style="color: #4A90E2;font-size:20px"></i><span class="fw-bolder" style="font-size:20px">Rejected Connection</span>
+                            </button>
+                        </h2>
+                        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                @await Component.InvokeAsync("RejectedConnectionVC")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<style>
+    .sendReq {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        color: #ffffff; 
+        background-color: #28a745;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+</style>

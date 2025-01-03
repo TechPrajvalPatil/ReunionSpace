@@ -1,0 +1,36 @@
+﻿@model IEnumerable<PollVM>
+<div class="col-lg-12 grid-margin stretch-card">
+    <h3 class="fw-bolder text-primary mb-4" style="font-size: 2rem; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);">
+        <i class="fa fa-check-circle me-2"></i> <span class="text-dark fw-bold">Polls Responded</span>
+    </h3>
+    <p class="card-description" style="font-size: 1.2rem; color: #555; margin-bottom: 2rem;">
+        View Your Submitted Responses!
+    </p>
+
+    <div class="list-group">
+        @if (!Model.Any())
+        {
+            <div class="alert alert-warning text-center" role="alert">
+                <i class="fa fa-exclamation-triangle me-2" style="font-size: 1.5rem;"></i> You havent Responded a single Poll yet !!
+            </div>
+        }
+        else
+        {
+            @foreach (var temp in Model)
+            {
+                <div class="list-group-item mb-3 border border-success shadow-sm rounded">
+                    <h5 class="fw-bold text-success">
+                        <i class="fa fa-question-circle me-2"></i> @temp.PollQuestion
+                    </h5>
+                    <p class="mb-1">
+                        <strong>Poll Date:</strong>
+                        <span class="badge bg-info">@temp.PollDate.ToString("MMMM dd, yyyy")</span>
+                    </p>
+                    <div class="text-center">
+                        <a asp-action="ShowResponse" asp-controller="PollResponse" asp-route-id="@temp.PollId" class="btn btn-success btn-rounded" style="padding:10px">View Response</a>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>

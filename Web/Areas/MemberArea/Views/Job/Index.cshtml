@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Job>
+
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Latest Job Openings</h2>
+
+    @foreach (var temp in Model)
+    {
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card mb-4 shadow-lg">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="card-title mb-0">
+                            <i class="fa fa-briefcase me-2"></i>@temp.JobTitle
+                        </h5>
+                    </div>
+
+                    <div class="card-body">
+                        <p class="mb-3">
+                            <i class="fa fa-user me-2" style="color: #4A90E2;"></i><strong class="fw-bold">Role:</strong> @temp.JobRole
+                        </p>
+                        <p class="mb-3">
+                            <i class="fa fa-info-circle me-2" style="color: #4A90E2;"></i><strong class="fw-bold">Description:</strong> @temp.JobDescription
+                        </p>
+                        <p class="mb-3">
+                            <i class="fa fa-book me-2" style="color: #4A90E2;"></i><strong class="fw-bold">Minimum Education:</strong> @temp.MinimumEducation
+                        </p>
+                        <p class="mb-3">
+                            <i class="fa fa-calendar me-2" style="color: #4A90E2;"></i><strong class="fw-bold">Experience:</strong> @temp.Experience
+                        </p>
+
+                        @if (!string.IsNullOrEmpty(temp.CompanyName))
+                        {
+                            <p class="mb-3">
+                                <i class="fa fa-building me-2" style="color: #4A90E2;"></i><strong class="fw-bold">Company Name:</strong> @temp.CompanyName
+                            </p>
+                        }
+                        @if (!string.IsNullOrEmpty(temp.ReferenceName))
+                        {
+                            <p class="mb-3">
+                                <i class="fa fa-user-circle me-2" style="color: #4A90E2;"></i><strong class="fw-bold">Reference Name:</strong> @temp.ReferenceName
+                            </p>
+                        }
+                        @if (!string.IsNullOrEmpty(temp.NoOfVacancies))
+                        {
+                            <p class="mb-3">
+                                <i class="fa fa-users me-2" style="color: #4A90E2;"></i><strong class="fw-bold">No of Vacancies:</strong> @temp.NoOfVacancies
+                            </p>
+                        }
+                        @if (!string.IsNullOrEmpty(temp.AnyOtherInfo))
+                        {
+                            <p class="mb-3">
+                                <i class="fa fa-file-text me-2" style="color: #4A90E2;"></i><strong class="fw-bold">Additional Info:</strong> @temp.AnyOtherInfo
+                            </p>
+                        }
+
+                        <p class="mt-3">
+                            <i class="fa fa-clock-o me-1" style="color: #4A90E2;"></i>Posted on: @temp.CreatedDate.ToString("MMMM dd, yyyy")
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+    .card {
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+</style>

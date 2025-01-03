@@ -1,0 +1,67 @@
+﻿@model List<Core.MemberResume>
+
+<div class="container mt-5">
+    <div class="resume-section card shadow-lg p-4">
+        <h3 class="text-center mb-4" style="font-weight: bold;">Your Resumes</h3>
+
+        @if (Model != null && Model.Any())
+        {
+            <div class="list-group">
+                @foreach (var temp in Model)
+                {
+                    <div class="list-group-item d-flex justify-content-between align-items-center mb-3 border rounded shadow-sm p-3">
+                        <div>
+                            <!-- Display Resume Type and Uploaded Name with direct preview link -->
+                            <a href="@Url.Content(temp.ResumeFilePath)" target="_blank" class="text-decoration-none text-primary">
+                                <h5 class="mb-1">@temp.FileType Resume - @System.IO.Path.GetFileName(temp.ResumeFilePath)</h5>
+                            </a>
+                            <p>
+                                Last Updated: @temp.LastUpadatedDate.ToString("yyyy-MM-dd")
+                            </p>
+                        </div>
+
+                        <!-- Update Button -->
+                        <div>
+                            <a asp-controller="Profile" asp-action="EditResume" asp-route-id="@temp.MemberResumeId"
+                               class="btn btn-outline-secondary btn-sm">
+                                <i class="fa fa-edit"></i> Update
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="text-center">
+                <div class="alert alert-warning text-center">
+                    <i class="fa fa-exclamation-triangle me-2"></i> No Resume Found.
+                </div>
+                <a asp-controller="Profile" asp-action="AddResume" class="btn btn-primary mt-3">
+                    <i class="fa fa-plus"></i> Add Resume
+                </a>
+            </div>
+        }
+    </div>
+</div>
+
+<!-- Custom CSS for styling -->
+<style>
+    .resume-section {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .list-group-item {
+        transition: transform 0.3s ease;
+    }
+
+        .list-group-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+    .text-primary {
+        color: #007bff !important;
+    }
+</style>

@@ -1,0 +1,86 @@
+﻿@model Infra.ViewModels.FeedsDetailsVM
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+            <div class="card shadow">
+                <div class="card-header text-center bg-danger text-white">
+                    <h2>@Model.FeedsTitle</h2>
+                </div>
+                <div class="card-body">
+                    <!-- Display Media First -->
+                    <div class="text-center mb-4">
+                        @if (Model.PhotoPathFile != null && Model.PhotoPathFile.Any())
+                        {
+                            <img src="@Model.PhotoPathFile.First()" alt="Feed Photo" class="img-fluid rounded" style="max-height: 250px; width: auto; object-fit: cover;" />
+                        }
+                        else if (Model.VideoUrl != null && Model.VideoUrl.Any())
+                        {
+                            <video class="img-fluid rounded" controls style="max-width: 100%; height: auto; max-height: 250px; object-fit: cover;">
+                                <source src="@Model.VideoUrl.First()" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        }
+                        else
+                        {
+                            <div class="alert alert-info">
+                                No media (photo or video) is associated with this feed.
+                            </div>
+                        }
+                    </div>
+
+                    <div class="mb-3">
+                        <h5 class="text-muted"><i class="fa fa-calendar"></i> Feed Date</h5>
+                        <p>@Model.FeedsDate.ToString("MMMM dd, yyyy")</p>
+                    </div>
+
+                    <div class="mb-3">
+                        <h5 class="text-muted"><i class="fa fa-info-circle"></i> Feed Description</h5>
+                        <p>@Model.FeedsDescription</p>
+                    </div>
+
+                    <div class="mb-3">
+                        <h5 class="text-muted"><i class="fa fa-tag"></i> Feed Type</h5>
+                        <p>@Model.FeedType</p>
+                    </div>
+
+                    <div class="mb-3">
+                        <h5 class="text-muted"><i class="fa fa-flag"></i> Feed Status</h5>
+                        <p>@Model.FeedStatus</p>
+                    </div>
+
+                    
+                    <div class="status-buttons mb-4">
+                        @if (Model.FeedStatus == "Pending")
+                        {
+                            <div style="text-align: center">
+                                <a asp-action="FeedAccept" asp-controller="ManageFeeds" asp-route-id="@Model.FeedsId" class="btn btn-success btn-rounded btn-fw">Accepted</a>
+                                <a asp-action="FeedReject" asp-controller="ManageFeeds" asp-route-id="@Model.FeedsId" class="btn btn-danger btn-rounded btn-fw">Rejected</a>
+                            </div>
+                        }
+                        else if (Model.FeedStatus == "Accepted")
+                        {
+                            <div style="text-align:center">
+                                <a asp-action="FeedReject" asp-controller="ManageFeeds" asp-route-id="@Model.FeedsId" class="btn btn-danger btn-rounded btn-fw">Rejected</a>
+
+                            </div>
+                        }
+                        else if (Model.FeedStatus == "Rejected")
+                        {
+                            <div style="text-align:center">
+                                <a asp-action="FeedAccept" asp-controller="ManageFeeds" asp-route-id="@Model.FeedsId" class="btn btn-success btn-rounded btn-fw">Accepted</a>
+
+                            </div>
+                        }
+                    </div>
+
+                    <div class="text-center">
+                        <a asp-action="Index" asp-controller="ManageFeeds" class="btn btn-secondary">
+                            <i class="fa fa-arrow-left"></i> Back to Feeds List
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

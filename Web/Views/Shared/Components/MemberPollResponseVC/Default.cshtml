@@ -1,0 +1,52 @@
+﻿@model IEnumerable<ResponseByMemberVM>
+
+<div class="container my-5">
+    <h5 class="card-title fw-bold text-primary text-center mb-4">
+        <i class="fa fa-poll-h me-2"></i>Polls Response
+    </h5>
+    <div class="bg-light p-4 rounded shadow-sm">
+        @if (Model != null && Model.Any())
+        {
+            foreach (var temp in Model)
+            {
+                <div class="mb-4 card border rounded p-4 bg-white shadow-sm animated-card">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fa fa-question-circle me-3" style="color: #007bff; font-size: 1.5rem;"></i>
+                        <h6 class="fw-bold text-dark mb-0">@temp.PollQuestion</h6>
+                    </div>
+                    <ul class="list-group">
+                        @foreach (var opt in temp.SelectedOptions)
+                        {
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <span class="text-success" style="font-weight: bold;">@opt</span>
+                                <i class="fa fa-check-circle text-success" style="font-size: 1.2rem;"></i>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="alert alert-warning text-center" role="alert">
+                <i class="fa fa-exclamation-triangle me-2" style="font-size: 1.5rem;"></i>No Poll Responses Available
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    
+    .card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .card:hover {
+            transform: translateY(-5px); 
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
+        }
+
+   
+
+   
+</style>

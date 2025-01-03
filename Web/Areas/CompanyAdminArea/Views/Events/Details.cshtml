@@ -1,0 +1,64 @@
+﻿@model Event
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+            <div class="card shadow">
+                <div class="card-header text-center bg-danger text-white">
+                    <h2>@Model.EventTitle</h2>
+                </div>
+                <div class="card-body">
+                    <!-- Event Logo -->
+                    @if (!string.IsNullOrEmpty(Model.EventLogo))
+                    {
+                        <div class="text-center mb-4">
+                            <img src="@Model.EventLogo" alt="Event Logo" class="img-fluid rounded" style="max-height: 250px; object-fit: cover;">
+                        </div>
+                    }
+
+                  
+                    <div class="mb-3">
+                        <h5 class="text-muted"><i class="fa fa-calendar"></i> Event Date & Time</h5>
+                        <p>@Model.EventDateTime.ToString("MMMM dd, yyyy hh:mm tt")</p>
+                    </div>
+
+                  
+                    <div class="mb-3">
+                        <h5 class="text-muted"><i class="fa fa-info-circle"></i> Event Description</h5>
+                        <p>@Model.EventShortDesc</p>
+                    </div>
+
+                    <div class="mb-3">
+                        <h5 class="text-muted"><i class="fa fa-tag"></i> Event Type</h5>
+                        <p>@Model.EventType</p>
+                    </div>
+
+                    <div class="mb-3">
+                        <h5 class="text-muted"><i class="fa fa-calendar-o"></i> Registration Period</h5>
+                        <p>
+                            From: @Model.RegistrationFromDate.ToString("MMMM dd, yyyy")<br />
+                            To: @Model.RegistrationToDate.ToString("MMMM dd, yyyy")
+                        </p>
+                    </div>
+
+                    
+                    <div class="mb-3">
+                        <h5 class="text-muted"><i class="fa fa-users"></i> Member Limit</h5>
+                        <p>@Model.MemberLimit members</p>
+                    </div>
+
+                    <div class="mb-3">
+                        <h5 class="text-muted"><i class="fa fa-map-marker"></i> Event Mode</h5>
+                        <p>@Model.EventMode</p>
+                    </div>
+                    <div class="text-center">
+                        <a asp-action="Index" asp-controller="Events" class="btn btn-secondary">
+                            <i class="fa fa-arrow-left"></i> Back to Events List
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

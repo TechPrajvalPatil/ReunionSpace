@@ -1,0 +1,56 @@
+﻿@model IEnumerable<MemberEducation>
+
+<div class="container mt-5">
+    <h3 class="text-center text-dark mb-4" style="font-weight: bold;">Education Details</h3>
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="row justify-content-center">
+            @foreach (var temp in Model)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card border-0 shadow-lg" style="border-radius: 10px;">
+                        <div class="card-body text-center" style="background-color: #f8f9fa;">
+                            <h5 class="card-title text-dark mb-3" style="font-weight: 600;">
+                                <i class="fa fa-graduation-cap" style="color: #4A90E2;"></i> @temp.EducationTitle
+                            </h5>
+                            <p class="card-text mb-3" style="font-size: 0.9rem; color: #6c757d;">
+                                <strong class="fw-bold">Passout Year:</strong> @temp.PassoutYear <br>
+                                <strong class="fw-bold">University/College:</strong> @temp.UniversityOrCollegeName <br>
+                                <strong class="fw-bold">Grade/Percentage:</strong> @temp.GradeOrPercentage
+                            </p>
+                            <a asp-action="EditEducation" asp-controller="Profile" asp-route-id="@temp.MemberEducationId" class="btn btn-outline-primary btn-sm" style="border-radius: 20px;">
+                                <i class="fa fa-edit"></i> Update
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="text-center mt-4">
+            <a asp-action="AddEducation" asp-controller="Profile" asp-area="MemberArea" class="btn btn-primary btn-lg" style="border-radius: 30px;">
+                <i class="fa fa-plus-circle"></i> Add Another Education
+            </a>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning text-center">
+            <i class="fa fa-exclamation-triangle me-2"></i>No education details found. You can add your education details by clicking on the button below:
+        </div>
+        <div class="text-center mt-3">
+            <a asp-action="AddEducation" asp-controller="Profile" asp-area="MemberArea" class="btn btn-primary btn-lg" style="border-radius: 30px;">
+                <i class="fa fa-plus-circle"></i> Add Education
+            </a>
+        </div>
+    }
+</div>
+
+<style>
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+
+</style>

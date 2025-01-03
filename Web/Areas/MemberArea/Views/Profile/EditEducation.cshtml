@@ -1,0 +1,41 @@
+﻿@model MemberEducation
+
+<div class="container mt-5">
+    <div class="card shadow-lg" style="max-width: 600px; margin: auto; border-radius: 10px;">
+        <div class="card-header bg-info text-white text-center" style="border-radius: 10px 10px 0 0;">
+            <h3 class="mb-0">Edit Education</h3>
+        </div>
+        <div class="card-body p-4">
+            <form asp-action="EditEducation" method="post">
+                <input type="hidden" asp-for="MemberEducationId" />
+
+                <div class="form-group mb-3">
+                    <label class="form-label">Education Title</label>
+                    <input type="text" asp-for="EducationTitle" class="form-control" placeholder="Enter the title of your education" />
+                </div>
+
+                <div class="form-group mb-3">
+                    <label class="form-label">Passout Year</label>
+                    <input type="text" asp-for="PassoutYear" class="form-control" placeholder="Enter passout year" />
+                </div>
+
+                <div class="form-group mb-3">
+                    <label class="form-label">University/College Name</label>
+                    <input type="text" asp-for="UniversityOrCollegeName" class="form-control" placeholder="Enter university or college name" />
+                </div>
+
+                <div class="form-group mb-3">
+                    <label class="form-label">Grade/Percentage</label>
+                    <input type="text" asp-for="GradeOrPercentage" class="form-control" placeholder="Enter grade or percentage" />
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-info btn-lg" style="border-radius: 30px; width: 100%;">
+                        <i class="fa fa-save"></i> Save Changes
+                    </button>
+                </div>
+            </form>
+        </div>
+        <a asp-action="EditProfile" asp-controller="MemberHome" asp-area="MemberArea" class="text-center"><i class="fa fa-arrow-left me-2 mb-2"></i>Back to Profile</a>
+    </div>
+</div>

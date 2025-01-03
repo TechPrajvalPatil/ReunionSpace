@@ -1,0 +1,50 @@
+﻿@{
+    Layout = "~/areas/memberarea/views/shared/_memberlayout.cshtml";
+}
+
+<div class="card shadow mb-4 border-0">
+    <div class="card-body text-center">
+        <h2 class="card-title" style="font-family:sans-serif">Welcome to Magic Alumni</h2>
+        <p class="card-text" style="color:forestgreen">
+            Connect with alumni, share your experiences, explore opportunities, and be part of your community.
+            Your journey continues here!
+        </p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="tabs-listing card shadow-lg border-0 p-4 overflow-auto" style="max-height: 400px;">
+           
+                <nav class="mb-3">
+                    <div class="nav nav-tabs justify-content-center" id="nav-tab" role="tablist">
+                        <button class="nav-link active" id="nav-sign-in-tab" data-bs-toggle="tab"
+                                data-bs-target="#nav-sign-in" type="button" role="tab"
+                                aria-controls="nav-sign-in" aria-selected="true">
+                            <span class="fw-bold">Sign In</span>
+                        </button>
+                        <button class="nav-link" id="nav-register-tab" data-bs-toggle="tab"
+                                data-bs-target="#nav-register" type="button" role="tab"
+                                aria-controls="nav-register" aria-selected="false">
+                            <span class="fw-bold">Register</span>
+                        </button>
+                    </div>
+                </nav>
+
+                <!-- Tab Content -->
+                <div class="tab-content" id="nav-tabContent">
+                    <!-- Sign In Tab -->
+                    <div class="tab-pane fade show active" id="nav-sign-in" role="tabpanel" aria-labelledby="nav-sign-in-tab">
+                        @await Component.InvokeAsync("MemberLoginVC")
+                    </div>
+
+                    <!-- Register Tab -->
+                    <div class="tab-pane fade" id="nav-register" role="tabpanel" aria-labelledby="nav-register-tab">
+                        @await Component.InvokeAsync("MemberRegisterVC")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

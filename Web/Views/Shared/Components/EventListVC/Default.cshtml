@@ -1,0 +1,94 @@
+﻿@model IEnumerable<EventRegVM>
+<section id="best-selling-items" class="position-relative p-3 mt-2">
+    <div class="container">
+        <div class="section-title d-md-flex justify-content-between align-items-center mb-4">
+           
+            <h3 class="fw-bolder text-center mb-4" style="font-size: 2.5rem;color: #4A90E2;">
+                <i class="fa fa-gift me-2"></i> <span class="text-dark fw-bold">Events</span>
+            </h3>
+        </div>
+
+        <div class="position-absolute top-50 end-0 pe-0 pe-xxl-5 me-0 me-xxl-5 swiper-next product-slider-button-next" tabindex="0" role="button" aria-label="Next slide">
+            <svg class="chevron-forward-circle d-flex justify-content-center align-items-center p-2" width="80" height="80">
+                <use xlink:href="#alt-arrow-right-outline"></use>
+            </svg>
+        </div>
+        <div class="position-absolute top-50 start-0 ps-0 ps-xxl-5 ms-0 ms-xxl-5 swiper-prev product-slider-button-prev swiper-button-disabled" tabindex="-1" role="button" aria-label="Previous slide">
+            <svg class="chevron-back-circle d-flex justify-content-center align-items-center p-2" width="80" height="80">
+                <use xlink:href="#alt-arrow-left-outline"></use>
+            </svg>
+        </div>
+
+        <div class="swiper product-swiper swiper-initialized swiper-horizontal swiper-backface-hidden">
+            <div class="swiper-wrapper" id="swiper-wrapper-426cf810351094f297" aria-live="polite">
+                @foreach (var temp in Model)
+                {
+                    <div class="swiper-slide" style="width: 300px; margin-right: 20px;">
+
+                        <div class="card position-relative p-4 border rounded-3 h-100 d-flex flex-column justify-content-between" style="min-height: 500px;">
+
+                            <div class="mb-3 text-center">
+                                <img src="@temp.EventLogo" class="shadow-sm rounded" alt="Event Image" style="width:100%; height:250px; object-fit:cover;">
+                            </div>
+
+                            <div class="mb-2 text-center">
+                                <h5 class="fw-bold" style="font-size: 1.25rem; color: #333;">@temp.EventTitle</h5>
+                            </div>
+
+
+                            <div class="mb-3 text-muted" style="font-size: 0.9rem; line-height: 1.5; color:#666;">
+                                <p class="align-content-center" style="min-height: 30px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">@temp.EventShortDesc</p>
+                            </div>
+
+
+                            <div class="mb-3 d-flex align-items-center">
+                                <i class="fa fa-calendar me-2" style="color: #6c757d;"></i>
+                                <p class="mb-0" style="font-size: 0.9rem; color: #333;">Registration Ends: <strong>@temp.RegistrationToDate.ToString("MMMM dd, yyyy")</strong></p>
+                            </div>
+
+
+                            <div class="mb-3 d-flex align-items-center">
+                                <i class="fa fa-users me-2" style="color: #6c757d;"></i>
+                                <p class="mb-0" style="font-size: 0.9rem; color: #333;">
+                                    Remaining Seats:
+                                    <span class="badge @((temp.RemainingSeats > 5) ? "bg-success" : "bg-danger")">@temp.RemainingSeats</span>
+                                </p>
+                            </div>
+
+
+                            <div class="text-center mt-auto">
+                                @if (temp.RemainingSeats == 0)
+                                {
+                                    <button class="btn btn-secondary btn-lg px-4 py-2 rounded-pill shadow-sm" disabled>
+                                        Event Full
+                                    </button>
+                                }
+                                else if (temp.IsMemberRegistered)
+                                {
+                                    <button class="btn btn-success btn-lg px-4 py-2 rounded-pill shadow-sm" disabled>
+                                        Registered
+                                    </button>
+                                }
+                                else if (temp.RegistrationFromDate > DateTime.Now)
+                                {
+                                    <div class="registration-info py-2">
+                                        <p class="mb-0 fw-bold"><span class="text-primary">Starts From: </span>@temp.RegistrationFromDate.ToString("MMM/dd")</p>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <form method="post" asp-action="Registration" asp-controller="EventReg" asp-route-id="@temp.EventId">
+                                        <button type="submit" class="btn btn-primary btn-lg px-4 py-2 rounded-pill shadow-sm">
+                                            Register
+                                        </button>
+                                    </form>
+                                }
+                            </div>
+
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,39 @@
+﻿@model PollOption
+<div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Edit</h4>
+            <p class="card-description"> Edit Polls </p>
+            <form asp-action="Edit" method="post" class="forms-sample">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div>
+                    <input type="hidden" asp-for="PollOptionId" />
+                </div>
+                <div class="form-group">
+                    <label class="form-label">PollOption</label>
+                    <input asp-for="Option" class="form-control" placeholder="Poll Option">
+                    <span asp-validation-for="Option"></span>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Correct</label>
+                    <select asp-for="IsCorrect" asp-items="ViewBag.CorrectOptions" class="form-control" style="padding: 0.94rem 1.375rem"></select>
+                    <span asp-validation-for="IsCorrect"></span>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="form-label">Poll Question</label>
+                    <select asp-for="PollId" asp-items=ViewBag.Polls class="form-control" style="padding: 0.94rem 1.375rem">
+                        <option>Select Poll Question</option>
+                    </select>
+                    <span asp-validation-for="PollId" class="text-danger"></span>
+                </div>
+
+                <input type="submit" value="Update" class="btn btn-primary btn-rounded mr-2">
+                <a asp-action="Index" class="btn btn-light btn-rounded">Back To List</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+

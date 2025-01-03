@@ -1,0 +1,14 @@
+﻿@model IEnumerable<CheckBoxVM>
+
+<div class="bg-light p-3 rounded-3" style="max-height: 200px; overflow-y: auto;">
+    @foreach (var temp in Model)
+    {
+            <div class="form-check form-check-inline mb-2">
+                <input type="checkbox" name="chk" value="@temp.Value" class="form-check-input" @if (temp.IsSelected)
+            {
+                <text>checked</text>
+            } />
+                <label class="form-check-label" for="chk_@temp.Value">@temp.Text</label>
+            </div>
+    }
+</div>

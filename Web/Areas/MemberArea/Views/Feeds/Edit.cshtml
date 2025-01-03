@@ -1,0 +1,75 @@
+﻿@model EditFeedPhotoVideoVM
+
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h3 class="fw-bolder text-primary text-center mb-4" style="font-size: 2.5rem;">
+                <i class="fa fa-edit me-2" style="color: #4A90E2;"></i> <span class="text-dark fw-bold">Edit Feed</span>
+            </h3>
+
+            <form asp-action="Edit" method="post" enctype="multipart/form-data">
+                <input type="hidden" asp-for="FeedsId" />
+                <input type="hidden" asp-for="FeedType" />
+                <input type="hidden" name="ExistingPhotoPath" value="@Model.PhotoPathFile" /> 
+                <input type="hidden" name="ExistingVideoUrl" value="@Model.VideoUrl" /> 
+                
+                <div class="mb-3 text-center">
+                    @if (Model.FeedType == Core.Enums.FeedTypeEnum.Photo)
+                    {
+                        <label class="form-label">Current Photo</label>
+                        <div>
+                            @if (!string.IsNullOrEmpty(Model.PhotoPathFile))
+                            {
+                                <img src="@Model.PhotoPathFile" alt="Current Feed Photo" class="img-fluid mb-2" style="max-width: 100%; max-height: 300px;" />
+                            }
+                            else
+                            {
+                                <p>No current photo available.</p>
+                            }
+                        </div>
+                        <label asp-for="PhotoPathFile" class="form-label">Upload New Photo</label>
+                        <input asp-for="FileUpload" type="file" class="form-control" />
+                        <span asp-validation-for="FileUpload" class="text-danger"></span>
+                    }
+                    else if (Model.FeedType == Core.Enums.FeedTypeEnum.Video)
+                    {
+                        <label class="form-label">Current Video</label>
+                        <div>
+                            @if (!string.IsNullOrEmpty(Model.VideoUrl))
+                            {
+                                <video controls class="img-fluid mb-2" style="max-width: 100%; max-height: 300px;">
+                                    <source src="@Model.VideoUrl" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            }
+                            else
+                            {
+                                <p>No current video available.</p>
+                            }
+                        </div>
+                        <label asp-for="VideoUrl" class="form-label">Upload New Video</label>
+                        <input asp-for="FileUpload" type="file" class="form-control" />
+                        <span asp-validation-for="FileUpload" class="text-danger"></span>
+                    }
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="FeedTitle" class="form-label">Feed Title</label>
+                    <input asp-for="FeedTitle" class="form-control" />
+                    <span asp-validation-for="FeedTitle" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="FeedsDescription" class="form-label">Description</label>
+                    <textarea asp-for="FeedsDescription" class="form-control"></textarea>
+                    <span asp-validation-for="FeedsDescription" class="text-danger"></span>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-rounded btn-fw">Update Feed</button>
+                    <a asp-action="ManageFeed" class="btn btn-dark btn-rounded btn-fw">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

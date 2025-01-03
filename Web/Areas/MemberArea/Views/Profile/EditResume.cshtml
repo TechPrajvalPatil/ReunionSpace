@@ -1,0 +1,44 @@
+﻿@model MemberResume
+
+<div class="container mt-5">
+    <div class="card shadow-lg p-4">
+        <h3 class="text-center text-primary mb-4">Edit Resume</h3>
+
+        <form asp-action="EditResume" method="post" enctype="multipart/form-data" class="needs-validation">
+            <input type="hidden" asp-for="MemberResumeId" />
+            <input type="hidden" asp-for="ResumeFilePath" />
+            <input type="hidden" asp-for="FileType" />
+
+            <div class="mb-3">
+                <label asp-for="ResumeFile" class="form-label">Upload New Resume</label>
+                <input asp-for="ResumeFile" type="file" class="form-control" />
+                <span asp-validation-for="ResumeFile" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <p><strong>Current Resume:</strong> @System.IO.Path.GetFileName(Model.ResumeFilePath)</p>
+                <p><strong>Last Updated:</strong> @Model.LastUpadatedDate.ToString("yyyy-MM-dd")</p>
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa fa-save"></i> Save Changes
+                </button>
+            </div>
+            
+        </form>
+
+        <div class="mt-2 text-center">
+            <a asp-action="EditProfile" asp-controller="MemberHome">
+                <i class="fa fa-arrow-left"></i> Back to Profile
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Optional: Custom CSS for styling -->
+<style>
+    .container {
+        max-width: 600px;
+    }
+</style>

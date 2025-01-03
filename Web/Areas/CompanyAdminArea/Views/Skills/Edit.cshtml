@@ -1,0 +1,22 @@
+﻿@model Skill
+<div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Edit</h4>
+            <p class="card-description"> Update Skill </p>
+            <form asp-action="Edit" method="post" class="forms-sample">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div>
+                    <input type="hidden" asp-for="SkillId" />
+                </div>
+                <div class="form-group">
+                    <label>Skill Name</label>
+                    <input asp-for="SkillName" class="form-control" placeholder="Skill">
+                    <span asp-validation-for="SkillName"></span>
+                </div>
+                <input type="submit" value="Update" class="btn btn-primary btn-rounded mr-2">
+                <a asp-action="Index" class="btn btn-light btn-rounded">Back To List</a>
+            </form>
+        </div>
+    </div>
+</div>

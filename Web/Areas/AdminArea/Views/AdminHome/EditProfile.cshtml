@@ -1,0 +1,45 @@
+﻿@model AdminProfileVM
+<div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h2 class="text-center"><i class="fa fa-id-card-o me-2"></i>Profile</h2>
+            <p class="card-description text-center"> Edit Your Profile </p>
+            <h3 class="text-success">@ViewBag.Message</h3>
+            <form asp-action="EditProfile" method="post" class="forms-sample">
+                <div class="form-group row">
+                    <label class="col-md-3 col-form-label text-center fw-bolder">Name</label>
+                    <div class="col-md-6">
+                        <input asp-for="FullName" type="text" class="form-control" readonly>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 col-form-label text-center fw-bolder">Address</label>
+                    <div class="col-md-6">
+                        <textarea asp-for="Address" class="form-control"></textarea>
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-3 col-form-label text-center fw-bolder">Contact No</label>
+                    <div class="col-md-6">
+                        <input asp-for="ContactNo" class="form-control" />
+                        <span asp-validation-for="ContactNo" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 col-form-label text-center fw-bolder">Email Id</label>
+                    <div class="col-md-6">
+                        <input asp-for="EmailId" class="form-control">
+                        <span asp-validation-for="EmailId" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-3 text-center">
+                        <input type="submit" value="Edit" class="btn btn-rounded btn-primary me-2" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

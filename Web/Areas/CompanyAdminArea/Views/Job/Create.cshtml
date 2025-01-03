@@ -1,0 +1,90 @@
+﻿@model Job
+<div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Create</h4>
+            <p class="card-description">Add Job Profile</p>
+            <form asp-action="Create" method="post" class="forms-sample">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group">
+                    <label class="form-label">Job Title</label>
+                    <input asp-for="JobTitle" class="form-control" placeholder="Title" required>
+                    <span asp-validation-for="JobTitle" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Job Description</label>
+                    <textarea asp-for="JobDescription" class="form-control" placeholder="Add Description" required></textarea>
+                    <span asp-validation-for="JobDescription" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Minimum Education</label>
+                    <input asp-for="MinimumEducation" class="form-control" placeholder="Education" required>
+                    <span asp-validation-for="MinimumEducation" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Experience</label>
+                    <input asp-for="Experience" class="form-control" placeholder="Experience" required>
+                    <span asp-validation-for="Experience" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Job Role</label>
+                    <input asp-for="JobRole" class="form-control" placeholder="Job Role" required>
+                    <span asp-validation-for="JobRole" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Company Name</label>
+                    <input asp-for="CompanyName" class="form-control" placeholder="optional">
+                    <span asp-validation-for="CompanyName"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Reference Name</label>
+                    <input asp-for="ReferenceName" class="form-control" placeholder="optional">
+                    <span asp-validation-for="ReferenceName"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">No Of Vacancies</label>
+                    <input asp-for="NoOfVacancies" class="form-control" placeholder="optional">
+                    <span asp-validation-for="NoOfVacancies"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Any Other Info</label>
+                    <input asp-for="AnyOtherInfo" class="form-control" placeholder="optional">
+                    <span asp-validation-for="AnyOtherInfo"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Status</label>
+                    <select asp-for="IsOpen" class="form-control" class="form-control" style="padding: 0.94rem 1.375rem" required>
+                        <option value="true">Open</option>
+                        <option value="false">Close</option>
+                    </select>
+                    <span asp-validation-for="IsOpen" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Created By</label>
+                    <select asp-for="CompanyAdminId" asp-items="ViewBag.Companies" class="form-control" style="padding: 0.94rem 1.375rem" required>
+                        <option>Select Company Admin</option>
+                    </select>
+                    <span asp-validation-for="CompanyAdminId" class="text-danger"></span>
+                </div>
+
+                <div>
+                    <input type="hidden" asp-for="CreatedDate" value="@DateTime.Now" />
+                </div>
+
+                <input type="submit" value="Save" class="btn btn-primary btn-rounded mr-2">
+                <a asp-action="Index" class="btn btn-light btn-rounded">Back To List</a>
+            </form>
+        </div>
+    </div>
+</div>
